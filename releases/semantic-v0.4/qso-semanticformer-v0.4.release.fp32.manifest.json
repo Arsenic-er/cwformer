@@ -1,0 +1,219 @@
+{
+  "modelVersion": "qso-semanticformer-0.4",
+  "checkpoint": "experiments/semantic-v04-late-fusion/qso-semanticformer-v0.4.release.pt",
+  "checkpointEpoch": 16,
+  "checkpointMetrics": {
+    "actMicroF1": 0.9999884772714178,
+    "actMacroF1": 0.9999926634581524,
+    "actF1ByLabel": {
+      "CQ": 1.0,
+      "DIRECTED": 1.0,
+      "REPLY": 1.0,
+      "IDENTIFY": 1.0,
+      "ASK": 1.0,
+      "PROVIDE": 0.9998826153304379,
+      "REPORT": 1.0,
+      "ACK": 1.0,
+      "CONFIRM": 1.0,
+      "CORRECTION": 1.0,
+      "REPEAT_REQUEST": 1.0,
+      "SPEED_REQUEST": 1.0,
+      "GREETING": 1.0,
+      "THANKS": 1.0,
+      "HANDOVER": 1.0,
+      "SIGNOFF": 1.0
+    },
+    "topicMicroF1": 0.9994536619029819,
+    "topicMacroF1": 0.9991911414938688,
+    "topicF1ByLabel": {
+      "CALLSIGN": 1.0,
+      "NAME": 0.999031007751938,
+      "AGE": 0.9970559371933267,
+      "LOCATION": 0.9981114258734656,
+      "WEATHER": 0.9990196078431373,
+      "POWER": 1.0,
+      "RIG": 0.9995002498750625,
+      "ANTENNA": 0.9985286905345758,
+      "RST": 0.999855637361051,
+      "REGION": 1.0,
+      "CQ_SCOPE": 1.0
+    },
+    "slotAccuracy": 0.9994919002929046,
+    "slotExactByLabel": {
+      "CALLSIGN": 1.0,
+      "NAME": 0.9790996784565916,
+      "AGE": 0.9983948635634029,
+      "LOCATION": 0.9652448657187994,
+      "WEATHER": 0.9839228295819936,
+      "POWER": 0.9859154929577465,
+      "RIG": 0.9832214765100671,
+      "ANTENNA": 0.9821138211382113,
+      "RST": 0.9996597482136781,
+      "REGION": 1.0,
+      "CQ_SCOPE": 1.0
+    },
+    "rawCriticalSlotExactMinimum": 0.9859154929577465,
+    "rawOtherSlotExactMinimum": 0.9652448657187994,
+    "decodedSlotExactByLabel": {
+      "CALLSIGN": 1.0,
+      "NAME": 0.9855305466237942,
+      "AGE": 0.9967897271268058,
+      "LOCATION": 0.9968404423380727,
+      "WEATHER": 1.0,
+      "POWER": 1.0,
+      "RIG": 1.0,
+      "ANTENNA": 0.9967479674796748,
+      "RST": 1.0,
+      "REGION": 1.0,
+      "CQ_SCOPE": 1.0
+    },
+    "criticalSlotExactMinimum": 1.0,
+    "otherSlotExactMinimum": 0.9855305466237942,
+    "hardNegativeFalseSlotFill": 0.0003872966692486445,
+    "askProvideConfusion": 0.0,
+    "ellipticalAnswerAccuracy": 1.0,
+    "registerAccuracy": 1.0,
+    "registerMacroF1": 1.0,
+    "registerF1ByLabel": {
+      "CW_PROCEDURAL": 1.0,
+      "CW_ABBREVIATED": 1.0,
+      "NATURAL_TEXT": 1.0,
+      "MIXED": 1.0,
+      "NOISE_UNKNOWN": 1.0
+    },
+    "procedureAccuracy": 1.0,
+    "procedureMacroF1": 1.0,
+    "procedureF1ByLabel": {
+      "CANONICAL": 1.0,
+      "INTELLIGIBLE_NONCANONICAL": 1.0,
+      "INCOMPLETE": 1.0,
+      "AMBIGUOUS": 1.0,
+      "IRRELEVANT": 1.0
+    },
+    "safeCommitAccuracy": 0.9999333333333333,
+    "ambiguousFalseAccept": 0.0009746588693957114,
+    "releaseGates": {
+      "actMacroF1": true,
+      "topicMacroF1": true,
+      "criticalSlotExact": true,
+      "otherSlotExact": true,
+      "askProvideConfusion": true,
+      "registerMacroF1": true,
+      "ellipticalAnswerAccuracy": true,
+      "hardNegativeFalseSlotFill": true,
+      "ambiguousFalseAccept": true
+    },
+    "releaseReady": true,
+    "examples": 15000
+  },
+  "config": {
+    "vocab_size": 45,
+    "d_model": 128,
+    "layers": 6,
+    "heads": 4,
+    "ff_dim": 256,
+    "dropout": 0.1,
+    "max_length": 128
+  },
+  "parameters": 942898,
+  "opset": 17,
+  "inputs": [
+    "input_ids",
+    "valid_mask",
+    "context_ids",
+    "self_callsign_ids",
+    "peer_callsign_ids",
+    "known_slots"
+  ],
+  "outputs": [
+    "act_logits",
+    "topic_logits",
+    "slot_logits",
+    "register_logits",
+    "procedure_logits",
+    "safe_to_commit_logits"
+  ],
+  "exports": [
+    {
+      "path": "experiments/semantic-v04-late-fusion/qso-semanticformer-v0.4.release.fp32.onnx",
+      "bytes": 3830708,
+      "sha256": "ec7de24f7b013aa3d22c7b374a1dc1af5ef50f11d2fd1bc6c47f2d34d0af5650",
+      "batchSize": 1,
+      "samples": 128,
+      "outputParityWithPytorch": {
+        "act_logits": {
+          "maxAbsError": 1.049041748046875e-05,
+          "meanAbsError": 1.6165431588888168e-06
+        },
+        "topic_logits": {
+          "maxAbsError": 7.62939453125e-06,
+          "meanAbsError": 1.674856651913036e-06
+        },
+        "slot_logits": {
+          "maxAbsError": 7.748603820800781e-06,
+          "meanAbsError": 8.231249637447036e-08
+        },
+        "register_logits": {
+          "maxAbsError": 4.76837158203125e-06,
+          "meanAbsError": 8.416245691478252e-07
+        },
+        "procedure_logits": {
+          "maxAbsError": 4.76837158203125e-06,
+          "meanAbsError": 8.575792890042067e-07
+        },
+        "safe_to_commit_logits": {
+          "maxAbsError": 4.76837158203125e-06,
+          "meanAbsError": 1.5385448932647705e-06
+        }
+      },
+      "latencyMs": {
+        "sessionCreation": 72.38384382799268,
+        "coldRun": 18.559937831014395,
+        "coldStartTotal": 90.94378165900707,
+        "hotMedian": 3.981144051067531,
+        "hotP95": 19.738911907188594
+      }
+    },
+    {
+      "path": "experiments/semantic-v04-late-fusion/qso-semanticformer-v0.4.release.int8.onnx",
+      "bytes": 1164897,
+      "sha256": "7cf7333e31c317db4c9636d4f74f83941865ae48d67ada4287884af65d203855",
+      "batchSize": 1,
+      "samples": 128,
+      "outputParityWithPytorch": {
+        "act_logits": {
+          "maxAbsError": 0.24417686462402344,
+          "meanAbsError": 0.02743564755655825
+        },
+        "topic_logits": {
+          "maxAbsError": 0.19447755813598633,
+          "meanAbsError": 0.03135594928806478
+        },
+        "slot_logits": {
+          "maxAbsError": 0.19736478477716446,
+          "meanAbsError": 0.0023017614069071137
+        },
+        "register_logits": {
+          "maxAbsError": 0.13742780685424805,
+          "meanAbsError": 0.019442771130707116
+        },
+        "procedure_logits": {
+          "maxAbsError": 0.11723041534423828,
+          "meanAbsError": 0.02082243476761505
+        },
+        "safe_to_commit_logits": {
+          "maxAbsError": 0.08907699584960938,
+          "meanAbsError": 0.023380666971206665
+        }
+      },
+      "latencyMs": {
+        "sessionCreation": 86.7107950616628,
+        "coldRun": 6.665321998298168,
+        "coldStartTotal": 93.37611705996096,
+        "hotMedian": 3.785468521527946,
+        "hotP95": 4.3944520759396255
+      }
+    }
+  ],
+  "runtimeContract": "experiments/semantic-v04-late-fusion/qso-semanticformer-v0.4.release.fp32.runtime-contract.json"
+}

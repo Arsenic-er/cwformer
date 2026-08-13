@@ -1,0 +1,10 @@
+Game-Morse-Adventurer-AI
+Copyright (c) 2026 Arsenic-er. All rights reserved.
+
+This repository declares runtime or development dependencies on NumPy,
+PyTorch, ONNX, ONNX Runtime, and pytest. Those projects are not bundled as
+source code here and remain governed by their respective licenses.
+
+Product and equipment names used in fictional synthetic examples may be
+trademarks of their respective owners. Their appearance does not imply
+affiliation, sponsorship, or endorsement.

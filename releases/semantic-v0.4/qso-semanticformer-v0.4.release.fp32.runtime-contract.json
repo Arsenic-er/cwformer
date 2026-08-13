@@ -1,0 +1,281 @@
+{
+  "contractVersion": "qso-semantic-runtime-4",
+  "schemaVersion": "qso-semantics-4",
+  "modelVersion": "qso-semanticformer-0.4",
+  "executionMode": "post-transcription-offline-contextual",
+  "maxSemanticLength": 128,
+  "maxCallsignLength": 8,
+  "inputs": {
+    "input_ids": {
+      "dtype": "int64",
+      "shape": [
+        "batch",
+        128
+      ]
+    },
+    "valid_mask": {
+      "dtype": "bool",
+      "shape": [
+        "batch",
+        128
+      ]
+    },
+    "context_ids": {
+      "dtype": "int64",
+      "shape": [
+        "batch",
+        2
+      ],
+      "columns": [
+        "phase",
+        "pendingQuestion"
+      ]
+    },
+    "self_callsign_ids": {
+      "dtype": "int64",
+      "shape": [
+        "batch",
+        8
+      ]
+    },
+    "peer_callsign_ids": {
+      "dtype": "int64",
+      "shape": [
+        "batch",
+        8
+      ]
+    },
+    "known_slots": {
+      "dtype": "float32",
+      "shape": [
+        "batch",
+        11
+      ]
+    }
+  },
+  "contextSchema": {
+    "phaseNames": [
+      "IDLE",
+      "CALLING",
+      "WAITING_REPLY",
+      "EXCHANGE",
+      "CLOSING"
+    ],
+    "phaseToId": {
+      "IDLE": 0,
+      "CALLING": 1,
+      "WAITING_REPLY": 2,
+      "EXCHANGE": 3,
+      "CLOSING": 4
+    },
+    "pendingQuestionNames": [
+      "NONE",
+      "CALLSIGN",
+      "NAME",
+      "AGE",
+      "LOCATION",
+      "WEATHER",
+      "POWER",
+      "RIG",
+      "ANTENNA",
+      "RST",
+      "REGION",
+      "CQ_SCOPE"
+    ],
+    "pendingQuestionToId": {
+      "NONE": 0,
+      "CALLSIGN": 1,
+      "NAME": 2,
+      "AGE": 3,
+      "LOCATION": 4,
+      "WEATHER": 5,
+      "POWER": 6,
+      "RIG": 7,
+      "ANTENNA": 8,
+      "RST": 9,
+      "REGION": 10,
+      "CQ_SCOPE": 11
+    },
+    "knownSlotNames": [
+      "CALLSIGN",
+      "NAME",
+      "AGE",
+      "LOCATION",
+      "WEATHER",
+      "POWER",
+      "RIG",
+      "ANTENNA",
+      "RST",
+      "REGION",
+      "CQ_SCOPE"
+    ],
+    "knownSlotToIndex": {
+      "CALLSIGN": 0,
+      "NAME": 1,
+      "AGE": 2,
+      "LOCATION": 3,
+      "WEATHER": 4,
+      "POWER": 5,
+      "RIG": 6,
+      "ANTENNA": 7,
+      "RST": 8,
+      "REGION": 9,
+      "CQ_SCOPE": 10
+    },
+    "bareAnswerRule": "A value-only reply is eligible for slot commit only in EXCHANGE when pendingQuestion identifies that slot."
+  },
+  "tokenizer": {
+    "padId": 0,
+    "clsId": 1,
+    "characterToId": {
+      " ": 2,
+      "A": 3,
+      "B": 4,
+      "C": 5,
+      "D": 6,
+      "E": 7,
+      "F": 8,
+      "G": 9,
+      "H": 10,
+      "I": 11,
+      "J": 12,
+      "K": 13,
+      "L": 14,
+      "M": 15,
+      "N": 16,
+      "O": 17,
+      "P": 18,
+      "Q": 19,
+      "R": 20,
+      "S": 21,
+      "T": 22,
+      "U": 23,
+      "V": 24,
+      "W": 25,
+      "X": 26,
+      "Y": 27,
+      "Z": 28,
+      "0": 29,
+      "1": 30,
+      "2": 31,
+      "3": 32,
+      "4": 33,
+      "5": 34,
+      "6": 35,
+      "7": 36,
+      "8": 37,
+      "9": 38,
+      "/": 39,
+      "-": 40,
+      ",": 41,
+      ".": 42,
+      "?": 43,
+      "+": 44
+    },
+    "normalization": "uppercase supported ASCII; remove unsupported characters; collapse spaces"
+  },
+  "outputs": {
+    "act_logits": {
+      "names": [
+        "CQ",
+        "DIRECTED",
+        "REPLY",
+        "IDENTIFY",
+        "ASK",
+        "PROVIDE",
+        "REPORT",
+        "ACK",
+        "CONFIRM",
+        "CORRECTION",
+        "REPEAT_REQUEST",
+        "SPEED_REQUEST",
+        "GREETING",
+        "THANKS",
+        "HANDOVER",
+        "SIGNOFF"
+      ],
+      "activation": "sigmoid"
+    },
+    "topic_logits": {
+      "names": [
+        "CALLSIGN",
+        "NAME",
+        "AGE",
+        "LOCATION",
+        "WEATHER",
+        "POWER",
+        "RIG",
+        "ANTENNA",
+        "RST",
+        "REGION",
+        "CQ_SCOPE"
+      ],
+      "activation": "sigmoid"
+    },
+    "slot_logits": {
+      "names": [
+        "O",
+        "CALLSIGN",
+        "NAME",
+        "AGE",
+        "LOCATION",
+        "WEATHER",
+        "POWER",
+        "RIG",
+        "ANTENNA",
+        "RST",
+        "REGION",
+        "CQ_SCOPE"
+      ],
+      "activation": "argmax per character"
+    },
+    "register_logits": {
+      "names": [
+        "CW_PROCEDURAL",
+        "CW_ABBREVIATED",
+        "NATURAL_TEXT",
+        "MIXED",
+        "NOISE_UNKNOWN"
+      ],
+      "activation": "argmax"
+    },
+    "procedure_logits": {
+      "names": [
+        "CANONICAL",
+        "INTELLIGIBLE_NONCANONICAL",
+        "INCOMPLETE",
+        "AMBIGUOUS",
+        "IRRELEVANT"
+      ],
+      "activation": "argmax"
+    },
+    "safe_to_commit_logits": {
+      "activation": "sigmoid",
+      "threshold": 0.5,
+      "meaning": "false forbids QSO state mutation; true remains subject to deterministic validation"
+    }
+  },
+  "config": {
+    "vocab_size": 45,
+    "d_model": 128,
+    "layers": 6,
+    "heads": 4,
+    "ff_dim": 256,
+    "dropout": 0.1,
+    "max_length": 128
+  },
+  "opset": 17,
+  "schemaSha256": "535ca89e52ab92bc2f2711e63655b1a57da835cfb80891d573f0c7ac47888f39",
+  "artifacts": [
+    {
+      "file": "qso-semanticformer-v0.4.release.fp32.onnx",
+      "bytes": 3830708,
+      "sha256": "ec7de24f7b013aa3d22c7b374a1dc1af5ef50f11d2fd1bc6c47f2d34d0af5650"
+    },
+    {
+      "file": "qso-semanticformer-v0.4.release.int8.onnx",
+      "bytes": 1164897,
+      "sha256": "7cf7333e31c317db4c9636d4f74f83941865ae48d67ada4287884af65d203855"
+    }
+  ]
+}

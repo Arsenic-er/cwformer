@@ -1,0 +1,42 @@
+{
+  "files": [
+    {
+      "bytes": 3147422,
+      "file": "train.jsonl.gz",
+      "samples": 100000,
+      "seed": 20260805,
+      "sha256": "20370ede634668aa1872bdcf244a844c6b896e1eec50af11b30bbd3060fa4f41"
+    },
+    {
+      "bytes": 474877,
+      "file": "validation.jsonl.gz",
+      "samples": 15000,
+      "seed": 110260805,
+      "sha256": "e22f1f564064ed3f280518de467602c13e955f535cf5015a4b7d259e53b86299"
+    },
+    {
+      "bytes": 475183,
+      "file": "confirm-90268741.jsonl.gz",
+      "samples": 15000,
+      "seed": 90268741,
+      "sha256": "e1d13489f0bddbc06fd464f5fa22add3a908b51dfe98748245217a18c9c244e8"
+    },
+    {
+      "bytes": 475039,
+      "file": "confirm-90268742.jsonl.gz",
+      "samples": 15000,
+      "seed": 90268742,
+      "sha256": "c8a36cf9ead0ae23944c4d9e4a48489302816ac4f71f733b1bfee834633c8da5"
+    },
+    {
+      "bytes": 475466,
+      "file": "confirm-90268743.jsonl.gz",
+      "samples": 15000,
+      "seed": 90268743,
+      "sha256": "62e6b1656420d8dcd79e68750cbdc88d378e41482f7d6eda6f28e1cc9dddadcb"
+    }
+  ],
+  "generator": "cw_pulseformer.semantic_data.SyntheticSemanticDataset",
+  "indexFormula": "seed + index * 1000003",
+  "schemaVersion": "qso-semantics-4"
+}

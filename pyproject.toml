@@ -1,0 +1,25 @@
+[project]
+name = "qso-semanticformer"
+version = "0.4.0"
+description = "Reproducible CW QSO semantic model and synthetic dataset for Game Morse Adventurer"
+requires-python = ">=3.11"
+authors = [
+  { name = "Arsenic-er", email = "302726993@qq.com" },
+]
+dependencies = [
+  "numpy>=2.0,<3",
+  "torch>=2.6,<2.7",
+]
+
+[project.optional-dependencies]
+export = [
+  "onnx>=1.17,<2",
+  "onnxruntime>=1.20,<2",
+]
+test = [
+  "pytest>=8,<9",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
