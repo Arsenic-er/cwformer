@@ -1,6 +1,6 @@
 <div align="center">
 
-# Game-Morse-Adventurer-AI
+# cwformer
 
 ### Comprensión semántica local para QSO ficticios en CW
 

@@ -1,6 +1,6 @@
 <div align="center">
 
-# Game-Morse-Adventurer-AI
+# cwformer
 
 ### 面向虚构 CW 通联的本地语义理解系统
 

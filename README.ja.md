@@ -1,6 +1,6 @@
 <div align="center">
 
-# Game-Morse-Adventurer-AI
+# cwformer
 
 ### 架空 CW QSO のためのローカル意味理解システム
 

@@ -1,5 +1,5 @@
 [project]
-name = "qso-semanticformer"
+name = "cwformer"
 version = "0.4.0"
 description = "Reproducible CW QSO semantic model and synthetic dataset for Game Morse Adventurer"
 requires-python = ">=3.11"
