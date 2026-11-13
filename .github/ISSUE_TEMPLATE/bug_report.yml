@@ -1,42 +1,85 @@
 name: Bug report
-description: Report a reproducible problem with this project.
-title: "[Bug]: "
+description: Report a problem with the QSO dataset, model, evaluation, or export.
+title: '[Bug]: '
 body:
-  - type: textarea
-    id: summary
-    attributes:
-      label: What happened?
-      description: Describe the problem clearly.
-    validations:
-      required: true
-  - type: textarea
-    id: steps
-    attributes:
-      label: Steps to reproduce
-      placeholder: |
-        1.
-        2.
-        3.
-    validations:
-      required: true
-  - type: textarea
-    id: expected
-    attributes:
-      label: Expected behavior
-    validations:
-      required: true
-  - type: textarea
-    id: environment
-    attributes:
-      label: Version and environment
-      placeholder: |
-        Project version or commit:
-        Operating system:
-        Relevant runtime, browser, or hardware:
-    validations:
-      required: true
-  - type: textarea
-    id: evidence
-    attributes:
-      label: Logs, screenshots, or a minimal example
-      description: Include any information that helps reproduce the problem.
+- type: dropdown
+  id: component
+  attributes:
+    label: Affected component
+    options:
+    - Dataset generation
+    - Training
+    - Inference
+    - Evaluation
+    - Model export or release artifacts
+    - Documentation
+    - Other / unsure
+  validations:
+    required: true
+- type: input
+  id: version
+  attributes:
+    label: Version or commit SHA
+  validations:
+    required: true
+- type: textarea
+  id: summary
+  attributes:
+    label: What happened?
+    placeholder: 'Example: The same checkpoint produces different intent labels for
+      the same fixed validation sample.'
+  validations:
+    required: true
+- type: textarea
+  id: steps
+  attributes:
+    label: Steps to reproduce
+    placeholder: '1. Select a fixed dataset split and checkpoint.
+
+      2. Run the same evaluation command twice with the same seed.
+
+      3. Compare predictions for the same sample identifier.'
+  validations:
+    required: true
+- type: textarea
+  id: expected
+  attributes:
+    label: Expected behavior
+    placeholder: The documented deterministic evaluation should produce consistent
+      predictions.
+  validations:
+    required: true
+- type: textarea
+  id: context
+  attributes:
+    label: Dataset, checkpoint, and run identifiers
+    placeholder: 'Dataset version and split:
+
+      Dataset manifest or SHA-256:
+
+      Checkpoint name or SHA-256:
+
+      Command or configuration:
+
+      Random seed:
+
+      Expected and observed metric (if applicable):'
+- type: textarea
+  id: environment
+  attributes:
+    label: Environment
+    placeholder: 'Operating system:
+
+      Python and PyTorch versions:
+
+      CPU or GPU:
+
+      CUDA version (if applicable):'
+  validations:
+    required: true
+- type: textarea
+  id: evidence
+  attributes:
+    label: Logs, screenshots, or a minimal example
+    description: Include the smallest example or log excerpt needed to reproduce the
+      problem.

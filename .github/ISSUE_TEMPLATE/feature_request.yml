@@ -1,27 +1,55 @@
 name: Feature request
-description: Suggest a new capability or improvement.
-title: "[Feature]: "
+description: Suggest an improvement to cwformer.
+title: '[Feature]: '
 body:
-  - type: textarea
-    id: problem
-    attributes:
-      label: Problem or use case
-      description: Explain what you are trying to do and what is currently missing.
-    validations:
-      required: true
-  - type: textarea
-    id: proposal
-    attributes:
-      label: Proposed solution
-      description: Describe the behavior you would like.
-    validations:
-      required: true
-  - type: textarea
-    id: alternatives
-    attributes:
-      label: Alternatives considered
-  - type: textarea
-    id: context
-    attributes:
-      label: Additional context
-      description: Add examples, mockups, or related issues if useful.
+- type: dropdown
+  id: component
+  attributes:
+    label: Affected component
+    options:
+    - Dataset generation
+    - Training
+    - Inference
+    - Evaluation
+    - Model export or release artifacts
+    - Documentation
+    - Other / unsure
+  validations:
+    required: true
+- type: textarea
+  id: problem
+  attributes:
+    label: Problem or use case
+    placeholder: 'Example: I need to inspect why a fixed checkpoint misclassifies
+      a QSO intent.'
+  validations:
+    required: true
+- type: textarea
+  id: proposal
+  attributes:
+    label: Proposed solution
+    placeholder: 'Example: Add an evaluation report that groups errors by intent and
+      dataset split.'
+  validations:
+    required: true
+- type: textarea
+  id: alternatives
+  attributes:
+    label: Alternatives considered
+    description: Describe other approaches or current workarounds, if any.
+- type: textarea
+  id: acceptance
+  attributes:
+    label: Acceptance criteria
+    placeholder: 'The report records the dataset manifest, checkpoint identifier,
+      and command.
+
+      Aggregate metrics can be traced to sample-level predictions.
+
+      Existing evaluation results remain reproducible.'
+- type: textarea
+  id: context
+  attributes:
+    label: Additional context
+    description: Add related issues, small examples, design sketches, or references
+      if useful.
